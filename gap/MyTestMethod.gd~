@@ -1,0 +1,575 @@
+#! @Title Boij Söderberg
+#! @Author Sebastian Posur
+
+#! @Chapter BoijSoederberg
+LoadPackage( "comb" );
+
+LoadPackage( "GradedModules" );
+
+LoadPackage( "Convex" );
+
+LoadPackage( "4ti2Interface" );
+
+#################################
+##
+## Global
+##
+#################################
+
+DeclareGlobalVariable( "BOIJ_SOEDERBERG" );
+
+#################################
+##
+## Categories
+##
+#################################
+
+DeclareCategory( "IsPosetOfRootSequences", IsObject );
+
+DeclareCategory( "IsRootSequence", IsObject );
+
+DeclareCategory( "IsIntervalOfRootSequences", IsObject );
+
+DeclareCategory( "IsMorphismOfIntervalsOfRootSequences", IsObject );
+
+DeclareCategory( "IsVirtualCohomologyTable", IsObject );
+
+DeclareCategory( "IsVirtualHilbertPolynomial", IsObject );
+
+DeclareCategory( "IsVectorSpaceWithIntegralStructure", IsObject );
+
+DeclareCategory( "IsMorphismOfVectorSpacesWithIntegralStructure", IsObject );
+
+##this is added by kamal just as test.
+DeclareCategory( " IsHomalgCategory", IsObject );
+
+#################################
+##
+## Properties
+##
+#################################
+
+#! @Section Properties
+
+## IsVectorSpaceWithIntegralStructure
+
+#! @Description
+#! @Returns true if the given vector space with integral structure has an embedding into a super space, false otherwise
+#! @Arguments vector_space_with_integral_structure
+DeclareProperty( "IsEmbedded",
+                 IsVectorSpaceWithIntegralStructure );
+
+#! @Description
+#! @Returns true if the given vector space with integral structure has a concrete presentation, false otherwise
+#! @Arguments vector_space_with_integral_structure                 
+DeclareProperty( "IsConcrete",
+                 IsVectorSpaceWithIntegralStructure );
+
+## IsVirtualHilbertPolynomial
+#! @Description
+#! @Returns true if the given virtual Hilbert polynomial has only integral values, false otherwise
+#! @Arguments virtual_hilbert_polynomial
+DeclareProperty( "IsIntegral",
+                 IsVirtualHilbertPolynomial );
+
+## IsVirtualCohomologyTable
+#! @Description
+#! @Returns true if the given virtual cohomology table has only integral values, false otherwise
+#! @Arguments virtual_cohomology_table
+DeclareProperty( "IsIntegral",
+                 IsVirtualCohomologyTable );
+
+#################################
+##
+## Attributes
+##
+#################################
+
+#! @Section Attributes
+
+## IsPosetOfRootSequences
+#! @Description
+#! @Returns the length of the root sequence in this poset
+#! @Arguments poset_of_root_sequences
+DeclareAttribute( "LengthOfRootSequences",
+                  IsPosetOfRootSequences );
+
+## IsRootSequence
+#TODO: Change the name of this Attribute
+#! @Description
+#! @Returns the poset of root sequence in which the given root sequence lies
+#! @Arguments root_sequence
+DeclareAttribute( "UnderlyingPosetOfRootSequences",
+                  IsRootSequence );
+
+#! @Description
+#! @Returns the virtual Hilbert polynomial associated to the virtual vector bundle of rank 1 with supernatural cohomology given by
+#! the root sequence
+#! @Arguments root_sequence
+DeclareAttribute( "HilbertPolynomial",
+                  IsRootSequence );
+
+#TODO: This has to become a constructor
+#! @Description
+#! @Returns the virtual cohomology table associated to the virtual vector bundle of rank 1 with supernatural cohomology given by
+#! the root sequence
+#! @Arguments root_sequence
+DeclareAttribute( "CohomologyTable",
+                  IsRootSequence );
+                  
+## IsIntervalOfRootSequences
+#! @Description
+#! @Returns the Homalg category of intervals of root sequences
+#! @Arguments interval_of_root_sequences
+DeclareAttribute( "Category",
+                  IsIntervalOfRootSequences );
+
+#TODO: Change the name of this Attribute
+#! @Description
+#! @Returns the poset of root sequences in which all root sequences within the given interval lie in.
+#! @Arguments interval_of_root_sequences
+DeclareAttribute( "UnderlyingPosetOfRootSequences",
+                  IsIntervalOfRootSequences );
+
+#! @Description
+#! @Returns the left boundary of the given interval of root sequences
+#! @Arguments interval_of_root_sequences                  
+DeclareAttribute( "LeftBoundary",
+                  IsIntervalOfRootSequences );
+
+#! @Description
+#! @Returns the right boundary of the given interval of root sequences
+#! @Arguments interval_of_root_sequences                   
+DeclareAttribute( "RightBoundary",
+                  IsIntervalOfRootSequences );
+
+#! @Description
+#! @Returns the underlying set of the given interval of root sequences
+#! @Arguments interval_of_root_sequences                   
+DeclareAttribute( "UnderlyingSet",
+                  IsIntervalOfRootSequences );
+
+#! @Description
+#! @Returns the largest maximal chain of the given interval of root sequences
+#! @Arguments interval_of_root_sequences                     
+DeclareAttribute( "TopMaximalChain",
+                  IsIntervalOfRootSequences );
+
+#! @Description
+#! @Returns a set of root sequences whose corresponding Hilbert polynomials form a basis of the
+#! vector space of Hilbert polynomials within <A>interval_of_root_sequences</A>
+#! @Arguments interval_of_root_sequences                     
+DeclareAttribute( "TopMaximalHilbertChain",
+                  IsIntervalOfRootSequences );
+
+#! @Description
+#! @Returns the entries of a cohomology table within <A>interval_of_root_sequences</A>
+#! which can be modified without changing the Hilbert polynomial
+#! @Arguments interval_of_root_sequences                   
+DeclareAttribute( "KernelEntries",
+                  IsIntervalOfRootSequences );
+                  
+## IsMorphismOfIntervalsOfRootSequences
+
+#! @Description
+#! @Returns the source of the given morphism of intervals of root sequences
+#! @Arguments morphism_of_intervals_of_root_sequences   
+DeclareAttribute( "Source",
+                  IsMorphismOfIntervalsOfRootSequences );
+                  
+#! @Description
+#! @Returns the range of the given morphism of intervals of root sequences
+#! @Arguments morphism_of_intervals_of_root_sequences 
+DeclareAttribute( "Range",
+                  IsMorphismOfIntervalsOfRootSequences );
+
+## IsVirtualCohomologyTable
+##TODO: Change name
+#! @Description
+#! @Returns the poset of root sequences associated to the given virtual cohomology table
+#! @Arguments virtual_cohomology_table
+DeclareAttribute( "UnderlyingPosetOfRootSequences",
+                  IsVirtualCohomologyTable );
+
+#! @Description
+#! @Returns the Betti table of the given virtual cohomology table
+#! @Arguments virtual_cohomology_table                  
+DeclareAttribute( "BettiTable",
+                  IsVirtualCohomologyTable );
+
+#! @Description
+#! @Returns the Hilbert polynomial of the given virtual cohomology table
+#! @Arguments virtual_cohomology_table                     
+DeclareAttribute( "HilbertPolynomial",
+                  IsVirtualCohomologyTable );
+
+#! @Description
+#! @Returns the interval of the minimal ambient space of the given virtual cohomology table
+#! @Arguments virtual_cohomology_table                     
+DeclareAttribute( "IntervalOfMinimalAmbientSpace",
+                  IsVirtualCohomologyTable );
+
+## IsVirtualHilbertPolynomial
+#! @Description
+#! @Returns the underlying polynomial of the given virtual Hilbert polynomial
+#! @Arguments virtual_hilbert_polynomial  
+DeclareAttribute( "UnderlyingPolynomial",
+                  IsVirtualHilbertPolynomial );
+
+#! @Description
+#! @Returns the embedding of the one dimensional vector space spanned by the given virtual Hilbert polynomial
+#! into the vector space of all virtual Hilbert polynomials
+#! @Arguments virtual_hilbert_polynomial                   
+DeclareAttribute( "EmbeddingIntoSuperVectorSpace",
+                  IsVirtualHilbertPolynomial );
+
+#! @Description
+#! @Returns the corresponding element in the Grothendieck Group of stable modules over the exterior algebra
+#! @Arguments virtual_hilbert_polynomial                    
+DeclareAttribute( "K0ElementOfStableModuleCategory",
+                  IsVirtualHilbertPolynomial );
+
+#! @Description
+#! @Returns a pair containing the normalized Chern polynomial together with the twist which was needed for normalization
+#! @Arguments virtual_hilbert_polynomial                  
+DeclareAttribute( "TwistedChernPolynomial",
+                  IsVirtualHilbertPolynomial );
+
+## IsVectorSpaceWithIntegralStructure
+
+#! @Description
+#! @Returns the underlying structure morphism which defines the lattice of the input
+#! @Arguments vector_space_with_integral_structure
+DeclareAttribute( "UnderlyingStructureMorphism",
+                  IsVectorSpaceWithIntegralStructure );
+                  
+#! @Description
+#! @Returns the underlying vector space, i.e., the vector space without the integral structure
+#! @Arguments vector_space_with_integral_structure
+DeclareAttribute( "UnderlyingVectorSpace",
+                  IsVectorSpaceWithIntegralStructure );
+
+# DeclareAttribute( "UnderlyingHomalgRing",
+#                   IsVectorSpaceWithIntegralStructure );
+
+#! @Description
+#! @Returns the dimension of the given vector space with integral structure
+#! @Arguments vector_space_with_integral_structure
+DeclareAttribute( "Dimension",
+                  IsVectorSpaceWithIntegralStructure );
+
+#! @Description
+#! @Returns the embedding of an embedded vector space with integral structure
+#! @Arguments vector_space_with_integral_structure                  
+DeclareAttribute( "EmbeddingIntoSuperVectorSpace",
+                  IsVectorSpaceWithIntegralStructure and IsEmbedded );
+
+#! @Description
+#! @Returns the position of the concrete presentation of the given concrete vector space with integral structure
+#! @Arguments vector_space_with_integral_structure                    
+DeclareAttribute( "PositionOfConcretePresentation",
+                  IsVectorSpaceWithIntegralStructure and IsConcrete);
+
+## IsMorphismOfVectorSpacesWithIntegralStructure
+
+#! @Description
+#! @Returns the underlying morphism of <A>\mathbb{Q}</A>-spaces of the given morphism of vector spaces with integral structure
+#! @Arguments morphism_of_vector_spaces_with_integral_structure
+DeclareAttribute( "UnderlyingMorphism",
+                  IsMorphismOfVectorSpacesWithIntegralStructure );
+
+#! @Description
+#! @Returns the source of the given morphism, which is a vector space with integral structure
+#! @Arguments morphism_of_vector_spaces_with_integral_structure                 
+DeclareAttribute( "Source",
+                  IsMorphismOfVectorSpacesWithIntegralStructure );
+
+#! @Description
+#! @Returns the range of the given morphism, which is a vector space with integral structure
+#! @Arguments morphism_of_vector_spaces_with_integral_structure                    
+DeclareAttribute( "Range",
+                  IsMorphismOfVectorSpacesWithIntegralStructure );
+
+#################################
+##
+## Operations
+##
+#################################
+
+#! @Section Operations
+
+#! @Description
+#! @Returns value of <A>virtual_hilbert_polynomial</A> at <A>rational</A>
+#! @Arguments virtual_hilbert_polynomial, rational
+DeclareOperation( "Value",
+                  [ IsVirtualHilbertPolynomial, IsRat ] );
+
+DeclareOperation( "\*",
+                  [ IsVirtualHilbertPolynomial, IsRat ] );
+                  
+
+DeclareOperation( "\*",
+                  [ IsRat, IsVirtualHilbertPolynomial ] );
+
+
+DeclareOperation( "\+",
+                  [ IsVirtualHilbertPolynomial, IsVirtualHilbertPolynomial ] );
+                  
+
+DeclareOperation( "\<",
+                  [ IsRootSequence, IsRootSequence ] );
+
+#! @Description
+#! @Returns the infimum of <A>root_sequence_1</A> and <A>root_sequence_2</A> regarded as elements of
+#! the poset of all root sequences
+#! @Arguments root_sequence_1, root_sequence_2     
+DeclareOperation( "Infimum",
+                  [ IsRootSequence, IsRootSequence ] );
+
+#! @Description The input is a list of root sequences
+#! @Returns the infimum of all elements in the given list of root sequences.
+#! @Arguments list_of_root_sequences
+DeclareOperation( "Infimum",
+                  [ IsList ] );
+
+#! @Description
+#! @Returns the supremum of <A>root_sequence_1</A> and <A>root_sequence_2</A> regarded as elements of
+#! the poset of all root sequences
+#! @Arguments root_sequence_1, root_sequence_2                       
+DeclareOperation( "Supremum",
+                  [ IsRootSequence, IsRootSequence ] );
+
+#! @Description The input is a list of root sequences
+#! @Returns the supremum of all elements in the given list of root sequences.
+#! @Arguments list_of_root_sequences                 
+DeclareOperation( "Supremum",
+                  [ IsList ] );
+
+
+DeclareOperation( "\<",
+                  [ IsIntervalOfRootSequences, IsIntervalOfRootSequences ] );
+
+
+DeclareOperation( "\[\]",
+                  [ IsRootSequence, IsInt ] );
+
+
+DeclareOperation( "\[\]",
+                  [ IsRootSequence, IsList ] );
+
+DeclareOperation( "\[\]",
+                  [ IsVirtualCohomologyTable, IsList ] );
+
+DeclareOperation( "\*",
+                  [ IsVirtualCohomologyTable, IsRat ] );
+
+
+DeclareOperation( "\*",
+                  [ IsRat, IsVirtualCohomologyTable ] );
+
+
+DeclareOperation( "\+",
+                  [ IsVirtualCohomologyTable, IsVirtualCohomologyTable ] );
+
+#! @Description The input is a list of root sequences
+#! @Returns the list of coefficients of the given polynomial up to degree <A>degree</A>
+#! @Arguments polynomial, degree
+DeclareOperation( "RowOfCoefficients",
+                  [ IsLaurentPolynomial, IsInt ] );
+
+#! @Description Sets the display interval of virtual cohomology tables. Every list of integers is accepted as an input.
+#! @Returns nothing
+#! @Arguments list_of_integers
+DeclareOperation( "SetDisplayInterval",
+                  [ IsList ] );
+
+
+DeclareOperation( "AllHilbertPolynomials",
+                  [ IsIntervalOfRootSequences, IsInt ] );
+
+#! @Description This operation uses the Boij-Soederberg cone. If <A>filter = true</A> (default) this operation
+#! also takes into consideration that a vector bundle of rank <M>r</M> has vanishing Chern classes <M>c_l</M> for
+#! <M>l > r</M>.
+#! @Returns all Hilbert polynomials (and if <A>filter = true</A> also the corresponding Chern polynomials
+#! with shift) within the given interval which cannot be excluded by combinatorial means to be associated to vector bundles with given rank.
+#! @Arguments interval_of_root_sequences, rank, filter
+DeclareOperation( "AllHilbertPolynomials",
+                  [ IsIntervalOfRootSequences, IsInt, IsBool ] );
+
+#! @Description This operation uses the Boij-Soederberg cone.
+#! @Returns all virtual cohomology tables within the given interval which cannot be excluded by combinatorial means to be associated to vector bundles with given
+#! Hilbert polynomial.
+#! @Arguments interval_of_root_sequences, virtual_hilbert_polynomial
+DeclareOperation( "AllCohomologyTables",
+                  [ IsIntervalOfRootSequences, IsVirtualHilbertPolynomial ] );
+
+#################################
+##
+## Constructors
+##
+#################################
+
+#! @Section Constructors
+
+#! @Description
+#! @Returns a poset of root sequences of given length
+#! @Arguments length_of_root_sequences
+DeclareOperation( "PosetOfRootSequences",
+                  [ IsInt ] );
+
+#! @Description
+#!  The first argument is a list
+#!  of integers, not necessarily sorted, which also may contain duplicates.
+#!  The second optional argument is a poset of root sequences of which the constructed
+#!  root sequence shall be an element. If no second argument is given, a
+#!  standard poset of root sequences will be created and cached.
+#! @Returns a root sequence
+#! @Arguments list[,poset_of_root_sequences]
+DeclareGlobalFunction( "RootSequence" );
+
+#! @Description
+#! The two arguments define the left boundary and the right boundary
+#! of an interval of root sequences. The first argument must be smaller or equal
+#! to the second argument.
+#! @Returns an interval of root sequences [ <A>root_sequence_1</A> .. <A>root_sequence_2</A> ]
+#! @Arguments root_sequence_1, root_sequence_2
+DeclareOperation( "IntervalOfRootSequences",
+                  [ IsRootSequence, IsRootSequence ] );
+
+#! @Description
+#! @Returns the trivial interval of root sequences [ root_sequence .. root_sequence ]
+#! @Arguments root_sequence
+DeclareOperation( "IntervalOfRootSequences",
+                  [ IsRootSequence ] );
+
+#! @Description
+#! The interval_of_root_sequences_source must be contained in interval_of_root_sequences_source.
+#! @Returns a morphism from <A>interval_of_root_sequences_source</A> to <A>interval_of_root_sequences_range</A>
+#! @Arguments interval_of_root_sequences_source, interval_of_root_sequences_range
+DeclareOperation( "MorphismOfIntervalsOfRootSequences",
+                  [ IsIntervalOfRootSequences, IsIntervalOfRootSequences ] );
+
+#! @Description
+#! The argument must be a list of pairs consisting of a rational number and a root sequence.
+#! @Returns a virtual cohomology table which corresponds to the linear combination given by list.
+#! @Arguments list                  
+DeclareOperation( "VirtualCohomologyTable",
+                  [ IsList ] );
+
+#! @Description
+#! The first argument is a list of rational numbers.
+#! @Returns a virtual cohomology table computed as linear combination with coefficients given in <A>list</A>
+#! and vectors given as the top maximal chain of the <A>interval_of_root_sequences</A>
+#! @Arguments list, interval_of_root_sequences
+DeclareOperation( "VirtualCohomologyTable",
+                  [ IsList, IsIntervalOfRootSequences ] );
+
+#! @Description
+#! The argument is a list of rational numbers, where the i-th argument contains the i-1-th coefficient of
+#! the virtual Hilbert polynomial.
+#! @Returns a virtual Hilbert polynomial
+#! @Arguments list_of_coefficients    
+DeclareOperation( "VirtualHilbertPolynomial",
+                  [ IsList ] );
+
+#! @Description
+#! @Returns a virtual Hilbert polynomial with underlying polynomial <A>polynomial</A>
+#! @Arguments polynomial
+DeclareOperation( "VirtualHilbertPolynomial",
+                  [ IsLaurentPolynomial ] );
+
+#! @Description
+#! @Returns a virtual Hilbert polynomial corresponding to <A>root_sequence</A>
+#! @Arguments root_sequence
+DeclareOperation( "VirtualHilbertPolynomial",
+                  [ IsRootSequence ] );
+
+#! @Description
+#! @Returns a virtual Hilbert polynomial associated to <A>virtual_cohomology_table</A>
+#! @Arguments virtual_cohomology_table
+DeclareOperation( "VirtualHilbertPolynomial",
+                  [ IsVirtualCohomologyTable ] );
+                  
+#! @Description
+#! The input is a map <M>V \rightarrow W</M> of <M>\mathbb{Q}</M>-spaces. The basis of the pushed presentation
+#! to W will be the lattice basis of the output.
+#! @Returns a vector space with integral structure
+#! @Arguments homalg_map
+DeclareOperation( "VectorSpaceWithIntegralStructure",
+                  [ IsHomalgMap ] );
+
+#! @Description
+#! The first argument must be a list of univariate linearly independent polynomials over <M>\mathbb{Q}</M>.
+#! The second argument is the maximal degree of the polynomials of the ambient space.
+#! @Returns a vector space with integral structure generated by the polynomials in <A>list_of_hilbert_polynomials</A>
+#! and embedded in the ambient space of polynomials of degree <A>degree</A>
+#! @Arguments list_of_hilbert_polynomials, degree                  
+DeclareOperation( "SubVectorSpaceOfHilbertPolynomials",
+                  [ IsList, IsInt ] );
+
+#! @Description
+#! Constructor of a morphism of vector spaces with integral structure.
+#! The first and the second argument are vector spaces with integral structure
+#! representing the source and the target of the morphism. The third
+#! argument represents the underlying morphism <M>\alpha</M> of vector spaces.
+#! If <M>\alpha</M> is not integral written with respect to the lattice structure,
+#! the constructor will give an error.
+#! @Returns a morphism of vector spaces
+#! @Arguments IsVectorSpaceWithIntegralStructure, IsVectorSpaceWithIntegralStructure, IsHomalgMap
+DeclareOperation( "MorphismOfVectorSpacesWithIntegralStructure",
+                  [ IsVectorSpaceWithIntegralStructure, IsVectorSpaceWithIntegralStructure, IsHomalgMap ] );
+
+#! @Description
+#! Constructor of a morphism of a vector spaces with integral structure .
+#! The first argument <M>V</M> is a vector space with integral structure, whose
+#! underlying vector space must be identical to the range of the second
+#! argument, which is a monomorphism <M>\alpha</M> of vector spaces.
+#! @Returns a morphism of vector spaces with integral structure whose underlying morphism
+#! equals <M>\alpha</M>. It is the maximal morphism with this property.
+#! @Arguments IsVectorSpaceWithIntegralStructure, IsHomalgMap
+DeclareOperation( "MorphismOfVectorSpacesWithIntegralStructure",
+                  [ IsVectorSpaceWithIntegralStructure, IsHomalgMap ] );
+#################################
+##
+## Functors
+##
+#################################
+
+#! @Section Functors
+
+## VectorSpaceOfVirtualHilbertPolynomials
+DeclareGlobalVariable( "functor_VectorSpaceOfVirtualHilbertPolynomials" );
+
+#! @Description
+#! This functor maps a morphism of intervals of root sequences <M>I \rightarrow J</M> to the embedding of
+#! vector space of Hilbert polynomials lying above the interval <M>I</M> into the vector space of Hilbert polynomials
+#! lying above the interval <M>J</M>.
+DeclareOperation( "VectorSpaceOfVirtualHilbertPolynomials",
+                  [ IsIntervalOfRootSequences ] );
+
+DeclareGlobalFunction( "_Functor_VectorSpaceOfVirtualHilbertPolynomials_OnIntervalOfRootSequences" );
+
+DeclareGlobalFunction( "_Functor_VectorSpaceOfVirtualHilbertPolynomials_OnMorphismOfIntervalsOfRootSequences" );
+
+## VectorSpaceOfVirtualCohomologyTables
+DeclareGlobalVariable( "functor_VectorSpaceOfVirtualCohomologyTables" );
+
+#! @Description
+#! This functor maps a morphism of intervals of root sequences <M>I \rightarrow J</M> to the embedding of
+#! vector space of cohomology tables lying above the interval <M>I</M> into the vector space of cohomology tables
+#! lying above the interval <M>J</M>.
+DeclareOperation( "VectorSpaceOfVirtualCohomologyTables",
+                  [ IsIntervalOfRootSequences ] );
+
+DeclareGlobalFunction( "_Functor_VectorSpaceOfVirtualCohomologyTables_OnElementaryIntervals" );
+                  
+DeclareGlobalFunction( "_Functor_VectorSpaceOfVirtualCohomologyTables_OnIntervalOfRootSequences" );
+
+DeclareGlobalFunction( "_Functor_VectorSpaceOfVirtualCohomologyTables_OnMorphismOfIntervalsOfRootSequences" );
+
+## FullVectorSpaceOfVirtualHilbertPolynomials (a primitive functor)
+
+#! @Description
+#! This primitive functor associates to a natural number <M>n</M> the vector space of Hilbert polynomials of degree <M>n</M>.
+DeclareOperation( "FullVectorSpaceOfVirtualHilbertPolynomials",
+                  [ IsInt ] );

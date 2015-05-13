@@ -1,0 +1,128 @@
+DeclareOperation("AddToXX",
+                  [IsList,IsInt]);
+DeclareGlobalFunction( "Kamal" );
+DeclareOperation( "Qru",[IsInt, IsInt] );
+DeclareGlobalFunction( "Kam" );
+DeclareGlobalFunction( "IsGeneratorX" );
+
+DeclareGlobalFunction( "NumberOfDigitsOfTheNumber" );
+DeclareGlobalFunction( "Saleh" );
+DeclareGlobalFunction( "Summ");
+DeclareGlobalFunction( "Summm");
+DeclareGlobalFunction( "Lcmm");
+
+DeclareGlobalFunction( "GreatestCommonDivisor");
+
+DeclareGlobalFunction( "Hi");
+
+DeclareGlobalFunction( "IsThisNumberPrime");
+DeclareGlobalFunction( "Factor");
+DeclareGlobalFunction( "C");
+
+DeclareOperation("GreatestCommonDivisorOfMatrix",
+                      [IsMatrix]);
+
+DeclareGlobalFunction("PrintAllPrimeNumbersLessThan");
+DeclareOperation("MaximumKamal",[IsList]);
+DeclareOperation("TheFirstElement",[IsList]);
+DeclareOperation("MatrixKamal",[IsList]);
+DeclareOperation("MaximumOfTheMatrix",[IsMatrix]);
+DeclareOperation("MinimumOfTheMatrix",[IsMatrix]);
+DeclareOperation( "LowestBoundOfMatrix",
+                  [ IsMatrix ] );
+DeclareOperation("PrintTheMatrix",
+                  [ IsMatrix ] );
+DeclareOperation("LowestCommonMultipleOfTheList",
+                  [ IsList ] );
+
+DeclareOperation("PureBettiTableAsMatrix",
+                  [ IsList ] );
+
+DeclareOperation("PrintThePureMatrixAsBettiTable",
+                  [ IsMatrix,IsInt ] );
+DeclareOperation("PureBettiTable",
+                  [ IsList ] );
+DeclareOperation( "PureTheGreatestNumber",
+                  [ IsMatrix ]);
+DeclareOperation( "MatrixAfterSubstruction",
+               [ IsMatrix ]);
+
+#################################
+##
+## Global
+##
+#################################
+
+DeclareGlobalVariable( "BOIJ_SOEDERBERG" );
+
+#################################
+##
+## Categories
+##
+#################################
+
+DeclareCategory( "IsRootSequenceOfBettiDiagram", IsObject );
+DeclareCategory( "IsUpperEquationOfFacet", IsObject );
+DeclareCategory( "IsLowerEquationOfFacet", IsObject );
+
+
+
+DeclareGlobalFunction( "RootSequenceOfBettiDiagram" );
+DeclareGlobalFunction( "UpperEquationOfFacet" );
+DeclareGlobalFunction( "LowerEquationOfFacet" );
+
+
+#################################
+
+
+
+DeclareOperation( "DecomposeTheBettiTable",
+               [ IsBettiDiagram ]);
+DeclareOperation( "DecomposeTheBettiTableX",
+               [ IsBettiDiagram ]);
+
+DeclareOperation( "IsIncreasingSequence",
+               [ IsList]);
+DeclareOperation( "AddLinesToPureBettiTable",
+                [IsList,IsInt,IsInt]);
+DeclareOperation( "TheUpperEquationOfTheFacet",
+                [IsList,IsInt,IsInt,IsInt]);
+DeclareOperation( "TheLowerEquationOfTheFacet",
+                [IsList,IsInt,IsInt,IsInt]);
+DeclareOperation("FirstNoneZeroElementInTheMatrix",
+                       [IsMatrix]);
+DeclareOperation( "FindLess",
+                [IsList]);
+DeclareOperation( "FindMore",
+                [IsList]);
+DeclareGlobalFunction( "PureBettiTableX" );
+DeclareOperation( "FunctionOfThePureCohomolgyTable",
+                  [IsList, IsInt, IsInt]); 
+DeclareOperation("CohomologyTally",
+                 [IsList,IsInt,IsInt]);                       
+DeclareOperation( "PrintThePureMatrixAsCohomologyTally",
+               [ IsMatrix,IsInt ]);
+DeclareOperation("Pr",
+                 [IsList,IsInt,IsInt]);
+DeclareOperation("Pe",
+                 [IsList,IsInt,IsInt,IsInt,IsInt]);
+
+DeclareOperation("\*",
+                   [IsBettiDiagram,IsRat]);
+
+DeclareOperation("\*",
+                   [IsRat, IsBettiDiagram]);
+
+DeclareOperation("\+",
+                   [IsBettiDiagram,IsBettiDiagram]);
+DeclareOperation("AddEmptyLinesToTheMatrix",
+                 [IsMatrix, IsInt, IsInt]);
+
+DeclareOperation("\*",
+                   [IsUpperEquationOfFacet, IsRat]);
+DeclareOperation("\*",
+                   [IsRat, IsUpperEquationOfFacet]);
+DeclareOperation("\*",
+                   [IsLowerEquationOfFacet, IsRat]);
+DeclareOperation("\*",
+                   [IsRat, IsLowerEquationOfFacet]);
